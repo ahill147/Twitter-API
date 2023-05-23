@@ -27,5 +27,5 @@ public class Hashtag {
 
 	@ManyToMany
 	@JoinTable(name = "tweet_hashtags")
-	private Set<Tweet> tweetHashtags = new HashSet<>();
+	private Set<Tweet> tweets = new HashSet<>();
 }
