@@ -50,4 +50,8 @@ public class Tweet {
 	@ManyToMany
 	@JoinTable(name = "user_likes")
 	private Set<User> userLikes = new HashSet<>();
+
+	@ManyToMany(mappedBy = "tweetHashtags")
+	private Set<Hashtag> tweetHashtags = new HashSet<>();
+
 }
