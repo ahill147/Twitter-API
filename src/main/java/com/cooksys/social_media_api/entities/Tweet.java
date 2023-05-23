@@ -1,11 +1,15 @@
 package com.cooksys.social_media_api.entities;
 
 import java.security.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.springframework.lang.Nullable;
@@ -24,7 +28,7 @@ public class Tweet {
 	
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	private Long author;
+	private User author;
 	
 	private Timestamp posted;
 	
@@ -36,11 +40,14 @@ public class Tweet {
 	@Nullable
 	@ManyToOne
 	@JoinColumn
-	private Long inReplyTo;
+	private Tweet inReplyTo;
 	
 	@Nullable
 	@ManyToOne
 	@JoinColumn
-	private Long respostOf;
+	private Tweet respostOf;
 	
+	@ManyToMany
+	@JoinTable(name = "user_likes")
+	private Set<User> userLikes = new HashSet<>();
 }

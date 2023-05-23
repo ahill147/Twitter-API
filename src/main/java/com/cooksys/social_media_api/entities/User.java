@@ -1,11 +1,14 @@
 package com.cooksys.social_media_api.entities;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,5 +37,12 @@ public class User {
 	private Timestamp joined;
 	
 	private boolean deleted;
+	
+	@ManyToMany(mappedBy = "userLikes")
+	private Set<Tweet> tweetsLiked = new HashSet<>();
+	
+	@OneToMany(mappedBy = "author")
+	private Set<Tweet> tweets = new HashSet<>();
+	
 	
 }
