@@ -1,11 +1,10 @@
 package com.cooksys.social_media_api.entities;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,4 +24,8 @@ public class Hashtag {
 	private Timestamp firstUsed;
 	
 	private Timestamp lastUsed;
+
+	@ManyToMany
+	@JoinTable(name = "tweet_hashtags")
+	private Set<Tweet> tweetHashtags = new HashSet<>();
 }
