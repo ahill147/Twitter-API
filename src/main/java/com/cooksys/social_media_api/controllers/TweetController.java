@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cooksys.social_media_api.dtos.TweetRequestDto;
 import com.cooksys.social_media_api.dtos.TweetResponseDto;
-import com.cooksys.social_media_api.embeddables.Credentials;
+import com.cooksys.social_media_api.entities.Credentials;
 import com.cooksys.social_media_api.entities.Tweet;
 import com.cooksys.social_media_api.services.TweetService;
 
@@ -24,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/tweets")
 public class TweetController {
 
-	private final TweetService tweetService;
+private final TweetService tweetService;
 	
 	//Retrieves all non-deleted tweets. They should appear in reverse-chronological order
 	@GetMapping
@@ -65,5 +64,4 @@ public class TweetController {
 	public void likeTweet(@PathVariable Long id, @RequestBody Credentials credentials) {
 		tweetService.likeTweet(id, credentials);
 	}
-	
 }

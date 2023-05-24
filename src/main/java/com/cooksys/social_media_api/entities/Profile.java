@@ -1,18 +1,23 @@
-package com.cooksys.social_media_api.dtos;
+package com.cooksys.social_media_api.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 @NoArgsConstructor
 @Data
-public class ProfileRequestDto {
+public class Profile {
+
     private String firstName;
 
     private String lastName;
 
+    @Column(nullable = false)
     private String email;
 
     private String phone;
+
 }

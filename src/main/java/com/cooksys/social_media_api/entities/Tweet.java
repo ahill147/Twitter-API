@@ -1,9 +1,10 @@
 package com.cooksys.social_media_api.entities;
 
-import java.security.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,8 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import org.springframework.lang.Nullable;
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,43 +24,50 @@ import lombok.NoArgsConstructor;
 @Data
 public class Tweet {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "author_id")
-	private User author;
-	
-	private Timestamp posted;
-	
-	private boolean deleted;
-	
-	@Nullable
-	private String content;
-	
-	@Nullable
-	@ManyToOne
-	@JoinColumn
-	private Tweet inReplyTo;
-	
-	@Nullable
-	@ManyToOne
-	@JoinColumn
-	private Tweet respostOf;
-	
-	@ManyToMany
-	@JoinTable(name = "user_likes")
-	private Set<User> userLikes = new HashSet<>();
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	@ManyToMany(mappedBy = "tweets")
-	private Set<Hashtag> tweetHashtags = new HashSet<>();
-	
-	@ManyToMany
-	@JoinTable(name = "user_mentions")
-	private Set<User> mentionedUsers = new HashSet<>();
-	
-	
-	
+    @ManyToOne
+    private User author;
 
+    //################ Changed to @CreationTimestamp so value is not declared until needed #################
+    
+    @CreationTimestamp
+    private Timestamp posted;
+
+    private boolean deleted = false;
+
+    private String content;
+
+    @OneToMany(mappedBy = "inReplyTo")
+    private List<Tweet> replies;
+
+    @ManyToOne
+    private Tweet inReplyTo;
+
+    @OneToMany(mappedBy = "repostOf")
+    private List<Tweet> reposts;
+
+    @ManyToOne
+    private Tweet repostOf;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "tweet_hashtags",
+            joinColumns = @JoinColumn(name = "tweet_id"),
+            inverseJoinColumns = @JoinColumn(name = "hashtag_id")
+    )
+    private List<Hashtag> hashtags = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "likedTweets")
+    private List<User> likedByUsers = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_mentions",
+            joinColumns = @JoinColumn(name = "tweet_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> mentionedUsers = new ArrayList<>();
 }

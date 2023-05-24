@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cooksys.social_media_api.dtos.TweetRequestDto;
 import com.cooksys.social_media_api.dtos.TweetResponseDto;
-import com.cooksys.social_media_api.embeddables.Credentials;
+import com.cooksys.social_media_api.entities.Credentials;
 import com.cooksys.social_media_api.entities.Tweet;
 
 public interface TweetService {

@@ -1,10 +1,13 @@
 package com.cooksys.social_media_api.mappers;
 
-import com.cooksys.social_media_api.dtos.CredentialsRequestDto;
-import com.cooksys.social_media_api.embeddables.Credentials;
 import org.mapstruct.Mapper;
+
+import com.cooksys.social_media_api.dtos.CredentialsDto;
+import com.cooksys.social_media_api.entities.Credentials;
 
 @Mapper(componentModel = "spring")
 public interface CredentialsMapper {
-    Credentials RequestDtoToEntity(CredentialsRequestDto credentialsRequestDto);
+    CredentialsDto entityToDto(Credentials credentials);
+
+    Credentials dtoToEntity(CredentialsDto dto);
 }

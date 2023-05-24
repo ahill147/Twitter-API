@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.cooksys.social_media_api.entities.Tweet;
 
-@Repository
-public interface TweetRepository extends JpaRepository<Tweet, Long>{
+import java.util.Optional;
 
+@Repository
+public interface TweetRepository extends JpaRepository<Tweet, Long> {
 }
