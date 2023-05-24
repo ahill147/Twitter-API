@@ -72,12 +72,35 @@ public class UserServiceImpl implements UserService {
         return userMapper.entityToDto(user);
     }
 
+    @Override
+    public UserResponseDto deleteUser(UserRequestDto userRequestDto, String username) {
+        User user = getUserOrThrowError(username);
+        boolean validUser = checkUserCredentials(userRequestDto, user);
+        if (validUser) {
+            user.setDeleted(true);
+            userRepository.saveAndFlush(user);
+            return userMapper.entityToDto(user);
+        } else {
+            throw new BadRequestException("Wrong credentials");
+        }
+    }
+
     private User getUserOrThrowError(String username) {
         Optional<User> user = userRepository.findByCredentialsUsernameAndDeletedFalse(username);
-        if (user.isPresent()) {
+        if (user.isPresent() && !user.get().isDeleted()) {
             return user.get();
         } else {
             throw new BadRequestException("User not found");
         }
+    }
+
+    private boolean checkUserCredentials(UserRequestDto userRequestDto, User user) {
+        String username = userRequestDto.getCredentials().getUsername();
+        String password = userRequestDto.getCredentials().getPassword();
+
+        String userUsername = user.getCredentials().getUsername();
+        String userPassword = user.getCredentials().getPassword();
+
+        return username.equals(userUsername) && password.equals(userPassword);
     }
 }
