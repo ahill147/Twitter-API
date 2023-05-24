@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,6 +44,16 @@ public class User {
 	
 	@OneToMany(mappedBy = "author")
 	private Set<Tweet> tweets = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "following")
+	private Set<User> followers = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(name = "followers_following")
+	private Set<User> following = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "mentionedUsers")
+	private Set<Tweet> mentionedTweets = new HashSet<>();
 	
 	
 }
