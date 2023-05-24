@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Data
-public class UserResponseDto {
-    private String username;
-    private ProfileDto profile;
-    private Timestamp joined;
+public class HashtagDto {
+    private String label;
+    private Timestamp firstUsed;
+    private Timestamp lastUsed;
 }

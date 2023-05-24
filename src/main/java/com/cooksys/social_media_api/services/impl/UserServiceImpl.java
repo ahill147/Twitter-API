@@ -1,19 +1,21 @@
 package com.cooksys.social_media_api.services.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.cooksys.social_media_api.dtos.UserRequestDto;
 import com.cooksys.social_media_api.dtos.UserResponseDto;
 import com.cooksys.social_media_api.entities.Tweet;
 import com.cooksys.social_media_api.services.UserService;
-import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Override
+
+	@Override
     public boolean validateHashtag(String label) {
         return false;
     }

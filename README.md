@@ -7,12 +7,6 @@ For this assessment, you are tasked with implementing a RESTful API using Spring
 
 You will implement this API from scratch, working from a series of endpoint specifications (found at the end of this document) to develop a mental model of the data. You will develop a suitable database schema and write Spring services and controllers to handle requests, perform validation and business logic, and to transform data between the API and database models.
 
-## Testing the API
-Included in this skeleton are 2 json files required to run the test suite for this final project. To run the tests you will need postman's newman CLI. To install newman run the command `npm install -g newman`. Once newman is installed you need to navigate to the folder containing the Assessment 1 Test Suite & Assessment 1 environment json files. Once there you can run the command `newman run "Assessment 1 Test Suite.postman_collection.json" -e "Assessment 1.postman_environment.json"`. When all tests are passing successfully you will pass 330 assertions and should see something similar to the following in your terminal:
-
-<img width="458" alt="successful_tests" src="https://user-images.githubusercontent.com/12191780/222555974-53992ad3-155c-4e77-9205-bc3b908e093c.png">
-
-
 ## Reading these Requirements
 
 ### RESTful Endpoint Methods and URLs
@@ -110,8 +104,7 @@ If a property should be an array of a specific type of element, it is represente
 This tells us that a `Kennel` has a property `dogs` that is an array of elements, the type of each of which is described by the `Dog` type
 
 ## Entity Relationship Diagram
-![Spring Assessment ERD](https://user-images.githubusercontent.com/12191780/187276918-ccb2d373-be3b-42ff-a74d-5560ba806a10.png)
-
+![Spring Assessment ERD](https://user-images.githubusercontent.com/32781877/169579728-d766de24-14d8-4b47-a8fb-cbcbaa1effa8.png)
 
 This ERD represents the database that students will create for this project. Students should only create three classes, `User`, `Tweet`, and `Hashtag`, annotated with `@Entity`. There are, however, two additional classes that students will need to create for this project: `Credentials` and `Profile`. These two classes will be annotated with `@Embeddable` and will be used inside of the `User` entity class with the `@Embedded` annotation. This allows us to maintain credentials and profile as seperate objects in Java while still being stored in just one table in the database.
 
