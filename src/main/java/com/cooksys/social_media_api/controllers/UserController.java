@@ -16,11 +16,6 @@ public class UserController {
 
     private final UserService userService;
 
-/*
-PATCH   users/@{username}
-DELETE  users/@{username}
- */
-
     @GetMapping("/@{username}")
     public UserResponseDto getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
@@ -29,6 +24,11 @@ DELETE  users/@{username}
     @PatchMapping("@{username}")
     public UserResponseDto updateUser(@RequestBody UserRequestDto userRequestDto, @PathVariable String username) {
         return userService.updateUser(userRequestDto, username);
+    }
+
+    @DeleteMapping("/@{username}")
+    public UserResponseDto deleteUser(@RequestBody UserRequestDto userRequestDto, @PathVariable String username) {
+        return userService.deleteUser(userRequestDto, username);
     }
 
     //############################  MOVE TO VALIDATE CONTROLLER #####################
