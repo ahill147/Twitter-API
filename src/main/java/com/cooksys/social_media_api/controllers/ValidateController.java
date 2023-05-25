@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/validate")
 public class ValidateController {
-    private final ValidateService validateService;
+	private final ValidateService validateService;
 
-    @GetMapping("/username/exists/@{username}")
+	@GetMapping("/username/exists/@{username}")
 
-    public Boolean validateUsername(@PathVariable String username) {
-        return validateService.validateUsername(username);
-    }
+	public Boolean validateUsername(@PathVariable String username) {
+		return validateService.validateUsername(username);
+	}
+
+	@GetMapping("/username/available/@{username}")
+	public Boolean isUsernameAvailable(@PathVariable String username) {
+		return validateService.isUsernameAvailable(username);
+	}
 
 }
