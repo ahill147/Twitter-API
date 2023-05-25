@@ -11,11 +11,21 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ValidateServiceImpl implements ValidateService {
-    private final UserRepository userRepository;
+	private final UserRepository userRepository;
 
-    @Override
-    public Boolean validateUsername(String username) {
-        Optional<User> user = userRepository.findByCredentialsUsernameAndDeletedFalse(username);
-        return !(user.isEmpty());
-    }
+	@Override
+	public Boolean validateUsername(String username) {
+		return checkUsernameExists(username);
+	}
+
+	@Override
+	public Boolean isUsernameAvailable(String username) {
+		return !checkUsernameExists(username);
+	}
+
+	private Boolean checkUsernameExists(String username) {
+		Optional<User> user = userRepository.findByCredentialsUsernameAndDeletedFalse(username);
+		return (user.isPresent());
+	}
+
 }
