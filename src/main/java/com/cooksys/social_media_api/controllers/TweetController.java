@@ -64,4 +64,9 @@ private final TweetService tweetService;
 	public void likeTweet(@PathVariable Long id, @RequestBody Credentials credentials) {
 		tweetService.likeTweet(id, credentials);
 	}
+	
+	@PostMapping("/{id}/reply")
+	public TweetResponseDto replyToTweet(@PathVariable Long id, @RequestBody TweetRequestDto tweetRequestDto) {
+		return tweetService.replyToTweet(id, tweetRequestDto);
+	}
 }

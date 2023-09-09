@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface HashtagRepository extends JpaRepository<Hashtag, Long> {
 
+	boolean existsByLabel(String label);
 }
